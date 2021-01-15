@@ -5,7 +5,8 @@ const checkDependency = (dependencies, getValues) => {
   if (dependencies && Object.keys(dependencies).length > 0) {
     const formState = getValues();
     map(dependencies, (value, key) => {
-      if (typeof value === "func") {
+      if (typeof value === "function") {
+        if (res === false) return;
         res = value(formState[key]);
       } else {
         res = dependencies[key] === formState[key];

@@ -6,6 +6,7 @@ import checkDependency from "../utils/helper";
 
 const InputField = (props) => {
   const {
+    type,
     label,
     id,
     definition,
@@ -26,6 +27,7 @@ const InputField = (props) => {
           <label>{label}</label>
           <Controller
             as={Input}
+            type={type}
             name={id}
             control={control}
             rules={{

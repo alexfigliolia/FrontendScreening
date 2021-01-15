@@ -19,6 +19,20 @@ const FormSection = ({
         {
           text: (
             <InputField
+              type={type}
+              label={label}
+              id={id}
+              definition={definition}
+              mask={mask}
+              control={control}
+              errors={errors}
+              dependencies={dependencies}
+              getValues={getValues}
+            />
+          ),
+          number: (
+            <InputField
+              type={type}
               label={label}
               id={id}
               definition={definition}
