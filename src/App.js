@@ -3,27 +3,35 @@ import { useForm } from "react-hook-form";
 import { Divider } from "antd";
 import map from "lodash/map";
 
-import InputField from "./components/InputField";
+import FormSection from "./components/FormSection";
 
 import data from "./mock/data";
 
 const App = () => {
-  const { control, handleSubmit, watch, errors } = useForm();
+  const { control, handleSubmit, watch, getValues, errors } = useForm();
   const hasMiddleName = watch("hasMiddleName");
   const hasApartmentOrSuite = watch("apartmentOrSuite");
 
+  const onSubmit = (data) => {
+    console.log(data);
+  };
+
   const labels = Object.keys(data);
 
-  const onSubmit = () => {
-    console.log("success");
-  };
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       {map(labels, (label) => (
         <>
           <Divider orientation="left">{label}</Divider>
           {map(data[label], (sectionData) => (
-            <InputField data={sectionData} />
+            <FormSection
+              data={sectionData}
+              control={control}
+              errors={errors}
+              getValues={getValues}
+              hasMiddleName={hasMiddleName}
+              hasApartmentOrSuite={hasApartmentOrSuite}
+            />
           ))}
         </>
       ))}
