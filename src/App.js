@@ -1,22 +1,58 @@
-function App() {
+import React from "react";
+import { useForm, Controller } from "react-hook-form";
+import { Form, Input, Select, Checkbox } from "antd";
+import map from "lodash/map";
+
+const App = () => {
+  const { control, handleSubmit, watch, errors } = useForm();
+  const hasMiddleName = watch("hasMiddleName");
+  const onSubmit = () => {
+    console.log("success");
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        {/* <img src={logo} className="App-logo" alt="logo" /> */}
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <label>First Name</label>
+      <Controller
+        as={Input}
+        name="firstName"
+        control={control}
+        defaultValue=""
+        rules={{
+          required: true,
+          pattern: /^(([A-Za-z]+[\-\']?)*([A-Za-z]+)?\s)+([A-Za-z]+[\-\']?)*([A-Za-z]+)?$/,
+        }}
+      />
+      {errors.firstName && <p>Please provide your first name</p>}
+      <Controller
+        name="Checkbox"
+        control={control}
+        render={(props) => (
+          <Checkbox
+            onChange={(e) => props.onChange(e.target.checked)}
+            checked={props.value}
+          >
+            Do you have a middle name?
+          </Checkbox>
+        )}
+      />
+      {hasMiddleName && (
+        <>
+          <label>Middle Name</label>
+          <Controller
+            as={Input}
+            name="middleName"
+            control={control}
+            defaultValue=""
+            rules={{
+              required: true,
+              pattern: /^(([A-Za-z]+[\-\']?)*([A-Za-z]+)?\s)+([A-Za-z]+[\-\']?)*([A-Za-z]+)?$/,
+            }}
+          />
+          {errors.middleName && <p>Please provide your middle name</p>}
+        </>
+      )}
+    </form>
   );
-}
+};
 
 export default App;
