@@ -10,8 +10,9 @@ const FormSection = ({
   errors,
   hasMiddleName,
   hasApartmentOrSuite,
+  getValues,
 }) => {
-  const { type, label, id, definition, mask, dependencies } = data;
+  const { type, label, id, definition, mask, dependencies, sourceList } = data;
   return (
     <>
       {
@@ -25,6 +26,7 @@ const FormSection = ({
               control={control}
               errors={errors}
               dependencies={dependencies}
+              getValues={getValues}
             />
           ),
           select: (
@@ -35,6 +37,8 @@ const FormSection = ({
               control={control}
               errors={errors}
               dependencies={dependencies}
+              getValues={getValues}
+              sourceList={sourceList}
             />
           ),
           checkbox: <Checkbox id={id} label={label} control={control} />,
