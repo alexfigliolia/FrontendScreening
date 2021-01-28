@@ -1,9 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import {makeStyles} from '@material-ui/core/styles';
-import {InputAdornment, MenuItem, TextField, Box , Button} from '@material-ui/core';
+import {InputAdornment, TextField, Box , Button} from '@material-ui/core';
 import {Person, Home} from '@material-ui/icons';
 import form from '../data/data';
 import StatesDropDown from './StatesDropDown';
+import CountriesDropDown from './CountriesDropdown';
 
 const useStyles = makeStyles((theme) => ({
   form: {
@@ -140,21 +141,12 @@ const Form = () => {
           label={homeAddress[4].label}
           className={classes.textFieldLeft}
         />
-        <TextField
+        <CountriesDropDown 
           className={classes.textField}
-          defaultValue="" 
-          size="small" 
-          variant="outlined" 
           label={homeAddress[5].label}
-          select
-          onChange={(e) => setCountry(e.target.value)}
-        >
-          {countryList.map(country => (
-            <MenuItem key={country.code} value={country.name}>
-              {country.name}
-            </MenuItem>
-          ))}
-        </TextField>
+          setCountry={setCountry}
+          countries={countryList}
+        />
       </Box>
       <Button type="submit" className={classes.button}>Submit</Button>
     </form>

@@ -2,7 +2,6 @@ import React from 'react';
 import {MenuItem, TextField} from '@material-ui/core';
 
 const StatesDropDown = React.memo(({statesList, stateName, setStateName, label, className}) => {
-  console.log('render : states')
   return (
     <TextField
       className={className}
