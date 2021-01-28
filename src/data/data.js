@@ -6,7 +6,7 @@ const nameRegex = /^(([A-Za-z]+[\-\']?)*([A-Za-z]+)?\s)+([A-Za-z]+[\-\']?)*([A-Z
 const numberRegex = /^\d+$/;
 
 const form = {
-  'Full Name': [
+  'fullName': [
     {
       type: 'text',
       label: 'First Name',
@@ -36,7 +36,7 @@ const form = {
       definition: 'Please provide your last name'
     },
   ],
-  'Home Address': [
+  'homeAddress': [
     {
       type: 'text',
       label: 'Address 1',
