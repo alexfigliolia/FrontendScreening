@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import { InputAdornment, MenuItem, TextField, Box } from '@material-ui/core';
-import { Person, Home } from '@material-ui/icons';
-import { states, countries } from '../data/statesAndCountries';
+import React, {useState, useEffect} from 'react';
+import {makeStyles} from '@material-ui/core/styles';
+import {InputAdornment, MenuItem, TextField, Box , Button} from '@material-ui/core';
+import {Person, Home} from '@material-ui/icons';
 import form from '../data/data';
 
 const useStyles = makeStyles((theme) => ({
@@ -14,23 +13,62 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     marginBottom: theme.spacing(3),
   },
+  button: {
+    background: '#2975CA',
+    "&:hover": {
+      backgroundColor: '#2975CA',
+    },
+    color: '#FFF',
+  },
 }));
 
 const Form = () => {
   const classes = useStyles();
   const [firstName, setfirstName] = useState('');
-  const [LastName, setLastName,] = useState('');
+  const [lastName, setLastName,] = useState('');
   const [address1, setAddress1] = useState('');
   const [address2, setAddress2] = useState('');
   const [city, setCity] = useState('');
   const [zipcode, setZipcode] = useState('');
   const [state, setState] = useState('');
   const [country, setCountry] = useState('');
+  const [completed, setCompleted] = useState(0);
+  const [isZipCodeError, setisZipCodeError] = useState(false);
   const { fullName, homeAddress } = form;
-  console.log(fullName)
-  console.log(homeAddress)
+  const stateslist = homeAddress[4].sourceList;
+  const countryList = homeAddress[5].sourceList;
+
+  useEffect(()=> {
+    const inputs = [firstName, lastName, address1, city, zipcode, state, country];
+    let incomplete = 0;
+    for (let input of inputs) {
+      if (input === '') incomplete++;
+    }
+    setCompleted(Math.floor(((inputs.length - incomplete) / inputs.length) * 100));
+  }, [firstName, lastName, address1, city, zipcode, state, country]);
+
+  const verifyZipCode = (e) => {
+    const reg = new RegExp(form.homeAddress[6].mask);
+    const input = e.target.value.trim();
+    if (input === '') {
+      setisZipCodeError(false)
+    } else if (reg.test(input)) { // save in state if valid input
+      setZipcode(input);
+      setisZipCodeError(false)
+    } else {
+      setisZipCodeError(true)
+    }
+  };
+
+  const submitForm = (e) => {
+    e.preventDefault();
+    const info = {firstName, lastName, address1, address2, city, zipcode, state, country};
+    console.log(info);
+  }
+
   return (
-    <form className={classes.form} autoComplete="off">
+    <form className={classes.form} autoComplete="off" onSubmit={submitForm}>
+      <h3 style={completed === 100 ? {color: 'green'} : {}}>Complete: {completed}%</h3>
       <TextField
         className={classes.textField} 
         size="small" 
@@ -76,47 +114,51 @@ const Form = () => {
           className={classes.textField} 
           size="small" 
           variant="outlined" 
-          label="City"
+          label={homeAddress[3].label}
           onChange={(e) => setCity(e.target.value)}
         />
         <TextField
           className={classes.textField} 
           size="small" 
           variant="outlined" 
-          label="Zipcode"
-          onChange={(e) => setZipcode(e.target.value)}
+          label={homeAddress[6].label}
+          error={isZipCodeError}
+          onChange={(e) => verifyZipCode(e)}
         />
       </Box>
-      <Box display='flex'>
+      <Box display="flex">
         <TextField
           className={classes.textField} 
+          defaultValue=""
           size="small" 
           variant="outlined" 
-          label="State/Province"
+          label={homeAddress[4].label}
           select
           onChange={(e) => setState(e.target.value)}
         >
-          {states.map(state => (
+          {stateslist.map(state => (
             <MenuItem key={state} value={state}>
               {state}
             </MenuItem>
           ))}
         </TextField>
         <TextField
-          className={classes.textField} 
+          className={classes.textField}
+          defaultValue="" 
           size="small" 
           variant="outlined" 
-          label="Country"
+          label={homeAddress[5].label}
           select
           onChange={(e) => setCountry(e.target.value)}
         >
-          {countries.map(country => (
+          {countryList.map(country => (
             <MenuItem key={country.code} value={country.name}>
               {country.name}
             </MenuItem>
           ))}
         </TextField>
       </Box>
+      <Button type="submit" className={classes.button}>Submit</Button>
     </form>
   );
 }
