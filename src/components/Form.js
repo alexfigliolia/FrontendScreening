@@ -13,6 +13,11 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     marginBottom: theme.spacing(3),
   },
+  textFieldLeft: {
+    width: '100%',
+    marginBottom: theme.spacing(3),
+    paddingRight: theme.spacing(2),
+  },
   button: {
     background: '#2975CA',
     "&:hover": {
@@ -111,7 +116,7 @@ const Form = () => {
       />
       <Box display="flex" >
         <TextField
-          className={classes.textField} 
+          className={classes.textFieldLeft} 
           size="small" 
           variant="outlined" 
           label={homeAddress[3].label}
@@ -128,7 +133,7 @@ const Form = () => {
       </Box>
       <Box display="flex">
         <TextField
-          className={classes.textField} 
+          className={classes.textFieldLeft}
           defaultValue=""
           size="small" 
           variant="outlined" 
