@@ -5,11 +5,16 @@ import {Person, Home} from '@material-ui/icons';
 import form from '../data/data';
 import StatesDropDown from './StatesDropDown';
 import CountriesDropDown from './CountriesDropdown';
+import CartaLogo from '../Images/CartaLogo.png'
 
 const useStyles = makeStyles((theme) => ({
   form: {
-    width: 540,
+    width: 480,
     margin: 'auto',
+    backgroundColor: '#FFF',
+    padding: theme.spacing(2),
+    borderRadius: 8,
+    border: '1px solid #f6f8fa',
   },
   textField: {
     width: '100%',
@@ -21,12 +26,21 @@ const useStyles = makeStyles((theme) => ({
     paddingRight: theme.spacing(2),
   },
   button: {
-    background: '#2975CA',
+    background: '#90B9D6',
     "&:hover": {
-      backgroundColor: '#2975CA',
+      backgroundColor: '#90B9D6',
     },
     color: '#FFF',
   },
+  formHeader: {
+    backgroundColor: '#90B9D6',
+    borderTopLeftRadius: 8,
+    borderTopRightRadius: 8,
+    // negative margin to fit as a form header
+    marginTop: -18,
+    marginLeft: -17,
+    marginRight: -17,
+  }
 }));
 
 const Form = () => {
@@ -75,7 +89,10 @@ const Form = () => {
 
   return (
     <form className={classes.form} autoComplete="off" onSubmit={submitForm}>
-      <h3 style={completed === 100 ? {color: 'green'} : {}}>Complete: {completed}%</h3>
+      <Box className={classes.formHeader} padding={2}>
+        <img src={CartaLogo} />
+      </Box>
+      <h4 style={completed === 100 ? {color: 'green'} : {}}>Complete: {completed}%</h4>
       <TextField
         className={classes.textField} 
         size="small" 
@@ -110,7 +127,7 @@ const Form = () => {
         className={classes.textField} 
         size="small" 
         variant="outlined" 
-        label={homeAddress[2].label}
+        label={`${homeAddress[2].label} (Optional)`}
         InputProps= {{
           startAdornment: <InputAdornment position="start"><Home /></InputAdornment>
         }}
@@ -148,7 +165,13 @@ const Form = () => {
           countries={countryList}
         />
       </Box>
-      <Button type="submit" className={classes.button}>Submit</Button>
+      <Button 
+        disabled={!(100 === completed)} 
+        type="submit" 
+        className={classes.button}
+      >
+        Submit
+      </Button>
     </form>
   );
 }
