@@ -1,13 +1,13 @@
 ## Installation
-git clone
-npm install
-npm start
+- git clone
+- npm install
+- npm start
 
 ## Notes
-Memoized components StatesDropDown and CountriesDropDown
-Zipcode uses Regex for validation
-Form Completion percentage is calculated using useEffect
-SubmitForm console.logs data that would be set to the backend
+- Memoized components StatesDropDown and CountriesDropDown
+- Zipcode uses Regex for validation
+- Form Completion percentage is calculated using useEffect
+- SubmitForm console.logs data that would be set to the backend
 
 ## Welcome!
 You've been invited for a screening at a prominent startup in the healthcare space. We are super excited to have you!
