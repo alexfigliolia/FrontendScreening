@@ -3,6 +3,7 @@ import {makeStyles} from '@material-ui/core/styles';
 import {InputAdornment, MenuItem, TextField, Box , Button} from '@material-ui/core';
 import {Person, Home} from '@material-ui/icons';
 import form from '../data/data';
+import StatesDropDown from './StatesDropDown';
 
 const useStyles = makeStyles((theme) => ({
   form: {
@@ -35,22 +36,22 @@ const Form = () => {
   const [address2, setAddress2] = useState('');
   const [city, setCity] = useState('');
   const [zipcode, setZipcode] = useState('');
-  const [state, setState] = useState('');
+  const [stateName, setStateName] = useState('');
   const [country, setCountry] = useState('');
   const [completed, setCompleted] = useState(0);
   const [isZipCodeError, setisZipCodeError] = useState(false);
   const { fullName, homeAddress } = form;
-  const stateslist = homeAddress[4].sourceList;
+  const statesList = homeAddress[4].sourceList;
   const countryList = homeAddress[5].sourceList;
 
   useEffect(()=> {
-    const inputs = [firstName, lastName, address1, city, zipcode, state, country];
+    const inputs = [firstName, lastName, address1, city, zipcode, stateName, country];
     let incomplete = 0;
     for (let input of inputs) {
       if (input === '') incomplete++;
     }
     setCompleted(Math.floor(((inputs.length - incomplete) / inputs.length) * 100));
-  }, [firstName, lastName, address1, city, zipcode, state, country]);
+  }, [firstName, lastName, address1, city, zipcode, stateName, country]);
 
   const verifyZipCode = (e) => {
     const reg = new RegExp(form.homeAddress[6].mask);
@@ -67,7 +68,7 @@ const Form = () => {
 
   const submitForm = (e) => {
     e.preventDefault();
-    const info = {firstName, lastName, address1, address2, city, zipcode, state, country};
+    const info = {firstName, lastName, address1, address2, city, zipcode, stateName, country};
     console.log(info);
   }
 
@@ -132,21 +133,13 @@ const Form = () => {
         />
       </Box>
       <Box display="flex">
-        <TextField
-          className={classes.textFieldLeft}
-          defaultValue=""
-          size="small" 
-          variant="outlined" 
+        <StatesDropDown
+          statesList={statesList}
+          stateName={stateName}
+          setStateName={setStateName}
           label={homeAddress[4].label}
-          select
-          onChange={(e) => setState(e.target.value)}
-        >
-          {stateslist.map(state => (
-            <MenuItem key={state} value={state}>
-              {state}
-            </MenuItem>
-          ))}
-        </TextField>
+          className={classes.textFieldLeft}
+        />
         <TextField
           className={classes.textField}
           defaultValue="" 
