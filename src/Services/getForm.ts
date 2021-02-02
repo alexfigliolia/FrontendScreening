@@ -2,5 +2,5 @@ import { Form } from 'Domain/';
 import { fetchAPI } from 'Utils/';
 
 export const getForm = () => {
-	return fetchAPI.get<Form>('/from');
+	return fetchAPI.get<Form>('/form');
 };

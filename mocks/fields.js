@@ -65,7 +65,7 @@ const fields = {
       label: 'State',
       id: 'state',
       definition: 'Please provide your state', sourceList: 'states',
-      dependencies: { state: [true] }
+      dependencies: { city: [true] } // I change to city, because it doesn’t make sense "state" need "state"
     },
     {
       type: 'select',

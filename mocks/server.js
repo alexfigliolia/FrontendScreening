@@ -9,7 +9,7 @@ const { states, countries } = require("./statesAndCountries");
 server.use(middlewares)
 server.use(jsonServer.bodyParser)
 
-server.get("/fields", (req, res) => {
+server.get("/form", (req, res) => {
     res.status(200).json(fields);
 })
 
