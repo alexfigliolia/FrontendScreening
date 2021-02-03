@@ -1,11 +1,8 @@
-const stuff = require('./statesAndCountries');
+// eslint-disable-next-line no-useless-escape
+const nameRegex = new RegExp(/^(([A-Za-z]+[\-\']?)*([A-Za-z]+)?\s)+([A-Za-z]+[\-\']?)*([A-Za-z]+)?$/).source;
+const numberRegex = new RegExp(/^\d+$/).source;
 
-const { states, countries } = stuff;
-
-const nameRegex = /^(([A-Za-z]+[\-\']?)*([A-Za-z]+)?\s)+([A-Za-z]+[\-\']?)*([A-Za-z]+)?$/;
-const numberRegex = /^\d+$/;
-
-const form = {
+const fields = {
   'Full Name': [
     {
       type: 'text',
@@ -26,7 +23,7 @@ const form = {
       mask: nameRegex,
       id: 'middleName',
       definition: 'Please provide your middle name',
-      dependencies: { hasMiddleName: true }
+      dependencies: { hasMiddleName: [true] }
     },
     {
       type: 'text',
@@ -54,7 +51,7 @@ const form = {
       label: 'Address 2',
       id: 'address2',
       definition: 'Please provide your apartment or suite number',
-      dependencies: { apartmentOrSuite: true }
+      dependencies: { apartmentOrSuite: [true] }
     },
     {
       type: 'text',
@@ -67,14 +64,14 @@ const form = {
       type: 'select',
       label: 'State',
       id: 'state',
-      definition: 'Please provide your state', sourceList: states,
-      dependencies: { state: city => city && city.length !== 0 }
+      definition: 'Please provide your state', sourceList: 'states',
+      dependencies: { city: [true] } // I change to city, because it doesn’t make sense "state" need "state"
     },
     {
       type: 'select',
       label: 'Country',
       id: 'country',
-      definition: 'Please provide your country', sourceList: countries
+      definition: 'Please provide your country', sourceList: 'countries'
     },
     {
       type: 'number',
@@ -83,13 +80,11 @@ const form = {
       id: 'zipCode',
       definition: 'Please provide your zipcode',
       dependencies: {
-        state: state => state && state.length !== 0,
-        country: country => country?.code === 'US' //polyfill me
+        state: [true],
+        country: ['US']
       }
     },
   ],
 };
 
-console.log('DATA', form);
-
-module.exports = form;
+module.exports = fields;
