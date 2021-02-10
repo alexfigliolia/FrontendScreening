@@ -1,0 +1,39 @@
+.field-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin: 10px 0;
+}
+
+.field-wrapper.checkbox {
+  flex-direction: row;
+  align-items: center;
+}
+
+.field-wrapper.checkbox label {
+  margin-right: 10px;
+}
+
+.field-wrapper.checkbox input {
+  height: 1rem;
+  width: 1rem;
+}
+
+.form-wrapper {
+  width: 50%;
+  margin: 50px auto;
+}
+
+.form-wrapper .input,
+.form-wrapper select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.field-wrapper label {
+  margin-bottom: 5px;
+}
+
+.form-section {
+  margin: 40px 0;
+}
