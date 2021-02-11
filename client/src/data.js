@@ -69,7 +69,7 @@ const form = {
       id: 'state',
       definition: 'Please provide your state',
       sourceList: states,
-      dependencies: { state: (city) => city && city.length !== 0 }
+      dependencies: { city: (city) => city && city.length !== 0 } // should this key be city instead?
     },
     {
       type: 'select',
