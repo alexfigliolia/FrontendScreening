@@ -1,34 +1,40 @@
 import React, { useState, useEffect } from 'react';
 
 import Input from './Input';
+import ProgressBar from './ProgressBar';
 import Select from './Select';
 
 export default function Form({ data }) {
   const [formSectionData, setFormSectionData] = useState();
   const [completedInputs, setCompletedInputs] = useState(0);
   const [totalInputs, setTotalInputs] = useState();
+  const [totalInputsMap, setTotalInputsMap] = useState({});
 
   useEffect(() => {
     const normalizedData = {};
-    let inputs = 0;
+    const inputsMap = {};
 
     for (let section in data) {
-      inputs += data[section].length;
-
-      data[section].forEach(
-        (field) =>
-          (normalizedData[section] = {
-            ...normalizedData[section],
-            [field.id]: field
-          })
-      );
+      data[section].forEach((field) => {
+        if (!field.dependencies && field.type !== 'checkbox') {
+          inputsMap[field.id] = true;
+        }
+        normalizedData[section] = {
+          ...normalizedData[section],
+          [field.id]: field
+        };
+      });
     }
 
     console.log(normalizedData);
 
+    setTotalInputsMap(inputsMap);
     setFormSectionData(normalizedData);
-    setTotalInputs(inputs);
   }, []);
+
+  useEffect(() => {
+    setTotalInputs(Object.keys(totalInputsMap).length);
+  }, [totalInputsMap]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -36,19 +42,26 @@ export default function Form({ data }) {
     // ... do something here like submit data to api
   };
 
-  const handleChange = ({ sectionName, updatedField, valid, name }) => {
-    // needs a better way to track remaining inputs taking into account dependencies
-    if (valid && !formSectionData[sectionName][name].valid) {
-      setCompletedInputs((prev) => prev + 1);
-    } else if (!valid && formSectionData[sectionName][name].valid) {
-      setCompletedInputs((prev) => prev - 1);
+  const handleChange = ({ sectionName, updatedField, fieldData }) => {
+    if (fieldData.type !== 'checkbox') {
+      if (
+        updatedField.valid &&
+        !formSectionData[sectionName][updatedField.id].valid
+      ) {
+        setCompletedInputs((prev) => prev + 1);
+      } else if (
+        !updatedField.valid &&
+        formSectionData[sectionName][updatedField.id].valid
+      ) {
+        setCompletedInputs((prev) => prev - 1);
+      }
     }
 
     setFormSectionData({
       ...formSectionData,
       [sectionName]: {
         ...formSectionData[sectionName],
-        [name]: updatedField
+        [updatedField.id]: updatedField
       }
     });
   };
@@ -56,12 +69,12 @@ export default function Form({ data }) {
   return (
     <div className="form-wrapper">
       <h1>Your information</h1>
-      <small>
-        {totalInputs - completedInputs} fields remaining - estimated time:{' '}
-        {/* Estimate each field will take 30 seconds to complete */}
-        {Math.floor(((totalInputs - completedInputs) * 30) / 60)}
-      </small>
-
+      {totalInputs && (
+        <ProgressBar
+          completedInputs={completedInputs}
+          totalInputs={totalInputs}
+        />
+      )}
       <form onSubmit={handleSubmit}>
         {Object.entries(data).map(([key, value]) => (
           <div className="form-section" key={key}>
@@ -75,6 +88,8 @@ export default function Form({ data }) {
                     sectionName={key}
                     formSectionData={formSectionData}
                     setFormSectionData={setFormSectionData}
+                    totalInputsMap={totalInputsMap}
+                    setTotalInputsMap={setTotalInputsMap}
                   />
                 ) : (
                   <Input
@@ -83,6 +98,8 @@ export default function Form({ data }) {
                     sectionName={key}
                     formSectionData={formSectionData}
                     setFormSectionData={setFormSectionData}
+                    totalInputsMap={totalInputsMap}
+                    setTotalInputsMap={setTotalInputsMap}
                   />
                 )}
               </React.Fragment>
