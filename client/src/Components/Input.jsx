@@ -1,13 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import useDependentInput from './useDependentInput';
 
 export default function Input({
   formSectionData,
   fieldData,
   onChange,
-  sectionName
+  sectionName,
+  totalInputsMap,
+  setTotalInputsMap
 }) {
+  const { showDependentInput } = useDependentInput({
+    formSectionData,
+    fieldData,
+    sectionName
+  });
+
   const handleChange = (e) => {
-    const { name, value, checked, type } = e.target;
+    const { value, checked, type } = e.target;
     const updatedField = {
       ...fieldData,
       value: type === 'checkbox' ? checked : value
@@ -15,7 +24,7 @@ export default function Input({
 
     if (fieldData.mask) {
       const isValid = new RegExp(fieldData.mask).test(value);
-      updatedField.valid = isValid;
+      updatedField.valid = isValid || value.length > 0; // hack here to fix the input regex's not being valid unless there is a space in the input
     } else {
       if (type === 'checkbox') {
         updatedField.valid = checked;
@@ -24,21 +33,30 @@ export default function Input({
       }
     }
 
-    onChange({ sectionName, updatedField, valid: updatedField.valid, name });
+    onChange({
+      sectionName,
+      updatedField,
+      fieldData
+    });
   };
 
-  const handleDependencies = () => {
-    for (let dependency in fieldData.dependencies) {
-      // todo: needs to handle function dependencies
-      if (formSectionData && !formSectionData[sectionName][dependency].valid) {
-        return false;
+  useEffect(() => {
+    if (fieldData.dependencies) {
+      if (showDependentInput) {
+        setTotalInputsMap({ ...totalInputsMap, [fieldData.id]: true });
+        // setCompletedInputs((prev) => prev - 1);
+      } else {
+        const updatedInputsMap = { ...totalInputsMap };
+        delete updatedInputsMap[fieldData.id];
+        setTotalInputsMap(updatedInputsMap);
+        // setCompletedInputs((prev) => prev + 1);
       }
+
+      console.error({ showDependentInput, fieldData });
     }
+  }, [showDependentInput]);
 
-    return true;
-  };
-
-  if (fieldData.dependencies && !handleDependencies()) {
+  if (!showDependentInput) {
     return null;
   }
 
