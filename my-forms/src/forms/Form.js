@@ -1,6 +1,5 @@
 import  React, { useState }  from 'react'
 import  {FormContact}  from './FormContact'
-import {FormSuccess} from './FormSuccess'
 import './Form.css'
 const Form = () => {
     const [isSubmitted, setIsSubmitted] = useState(false)
@@ -8,8 +7,8 @@ const Form = () => {
         setIsSubmitted(true);
     }
     return (
-        <div className="form-container">
-            {!isSubmitted ? <FormContact submitForm = {submitForm} /> : <FormSuccess /> }
+        <div className="form-container bg-body">
+            <FormContact submitForm = {submitForm} />  }
         </div>
     )
 }

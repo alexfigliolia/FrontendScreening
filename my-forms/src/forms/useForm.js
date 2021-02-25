@@ -9,37 +9,40 @@ const useForm = validate => {
         address1: '',
         address2: '',
         city: '',
-        state:'',
-        country: '',
         zipCode: ''
     })
+    
     const [selectedCountry, setCountry] = useState({
-        selectedCountry: ''
+        selectedCountry: null
     })
     const [selectedState, setState] = useState({
-        selectedState: ''
+        selectedState: null
     })
-    const [dependencies, setDependencies] = useState({
+    const [middleName, setMiddleName] = useState({
         hasMiddleName: false,
+    })
+    const [address2, setAddress] = useState({
         apartmentOrSuite: false
     })
+
     const [errors, setErrors] = useState({})
     const [isSubmitting, setIsSubmitting] = useState(false)
 
     const handleChange = e => {
+        console.log(e.target.name)
         const { name, value } = e.target
-        const { middleName, checked } = e.target
         setValues({
             ...values,
             [name] : value
         })
-        if(e.target.name == 'hasMiddleName') {
-            setDependencies({
-                hasMiddleName : checked
+        if(e.target.name === 'hasMiddleName') {
+            setMiddleName({
+                hasMiddleName : e.target.checked
             })
-        } else if(e.target.name == 'apartmentOrSuite' ){
-            setDependencies({
-                apartmentOrSuite : checked
+        } 
+        if(e.target.name === 'apartmentOrSuite' ){
+            setAddress({
+                apartmentOrSuite : e.target.checked
             })
         }
         
@@ -51,15 +54,14 @@ const useForm = validate => {
     }
 
     const handleCountry = selected => {
-        setCountry({selected: selected.value})
+        setCountry({selectedCountry: selected.value})
     }
     const handleState = selected => {
         setState({
             selectedState : selected.value
         })
-        console.log(selected.label)
     }
 
-    return { handleChange, values, handleSubmit, errors, dependencies, handleCountry, handleState, selectedCountry, selectedState }
+    return { handleChange, values, handleSubmit, errors, middleName, address2, handleCountry, handleState, selectedCountry, selectedState }
 };
 export default useForm;
