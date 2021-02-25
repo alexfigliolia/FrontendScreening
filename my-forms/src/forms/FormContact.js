@@ -86,6 +86,8 @@ export const FormContact = (submitForm) => {
                         { (item.id === 'state') ? 
                         <div>
                           <Select
+                          className="custom-input"
+                          classNamePrefix="custom-input"
                           value={selectedState[selectedState.value]}
                           onChange={handleState}
                           options={
@@ -102,7 +104,9 @@ export const FormContact = (submitForm) => {
                         </div>
                          :
                          <div>
-                         <Select className=""
+                         <Select
+                         className="custom-input"
+                         classNamePrefix="custom-input"
                          value={selectedCountry[selectedCountry.value]}
                          onChange={handleCountry}
                          options={
