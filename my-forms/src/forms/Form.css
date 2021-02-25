@@ -1,0 +1,51 @@
+body {
+    background-color: #8BC6EC;
+    background-image: linear-gradient(135deg, #8BC6EC 0%, #9599E2 100%);
+
+  font-size: 16px;
+  line-height: 1.2;
+  color: #888;
+}
+.form-box {
+    border: 3px solid white !important;
+    padding: 10px !important;
+    margin-top:  50px;
+    background: #eee;
+}
+.custom-input {
+    border-radius: 0px !important;
+    border: 3px solid white !important;
+    background-color: #eee !important;
+}
+.custom-input:disabled {
+    background-color: #ccc !important;
+}
+.form-button {
+    background-color: #8BC6EC;
+    color: white;
+    border: 3px solid white;
+}
+.custom-checkbox {
+    text-align: left !important;
+    position: absolute;
+    left: 15px;
+    margin-top: 7px;
+}
+.custom-label {
+    margin-left: 20px;
+}
+.custom-label-display {
+   display: none;
+}
+.error-text {
+    color: red;
+    font-size: 12px;
+    font-weight: 400px;
+    padding: 4px;
+}
+.progress-width {
+    width: 20%;
+}
+.hide-input {
+    display: none;
+}
