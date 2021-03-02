@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { url } from '../api';
 
-export function useDataForm() {
+export function useForm() {
   const [state, setState] = useState({
     error: null,
     data: null,
