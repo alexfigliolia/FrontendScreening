@@ -15,17 +15,17 @@ ___
 
 **The following is a spec checklist for our desired functionality:**
 
-- [ ] Render a form with the following features using the data  provided in data.js and **React.js**
-- [ ] You may scaffold out a project with the tools of your choosing -  **webpack**, **yeoman**, **create-react-app**, etc
-- [ ] The form should have two labeled sections (**Full Name** and **Home Address**)
-- [ ] Inside each section, render an input for **each** of the array indices using only the data provided
+- [x] Render a form with the following features using the data  provided in data.js and **React.js**
+- [x] You may scaffold out a project with the tools of your choosing -  **webpack**, **yeoman**, **create-react-app**, etc
+- [x] The form should have two labeled sections (**Full Name** and **Home Address**)
+- [x] Inside each section, render an input for **each** of the array indices using only the data provided
 - [ ] Create masks to validate against provided regexes if necessary
-- [ ] Inputs with a **dependencies** key should only be visible if all of the **dependency keys** resolve to true. The format of the **dependencies** object is as follows: 
+- [x] Inputs with a **dependencies** key should only be visible if all of the **dependency keys** resolve to true. The format of the **dependencies** object is as follows: 
     ```
     dependencies: { 
       [id_of_a_preceding_field (Ex: FirstName)]: value_or_conditional //ex: True | value => !!value
     }
-- [ ] Inputs with a **sourceList** parameter must limit its value to only the choices within the list provided
+- [x] Inputs with a **sourceList** parameter must limit its value to only the choices within the list provided
 - [ ] Track the progress of your users by tallying the total completed inputs against the total of incomplete inputs
 
 **A few things to keep in mind during this exercise:**
@@ -36,4 +36,33 @@ ___
 5. Beautiful forms get bonus points
 
 ![An example Form](./exampleForm.png)
+
+## Available Scripts
+
+In the project directory, you can run:
+
+
+### `yarn start`
+
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+The page will reload if you make edits.\
+You will also see any lint errors in the console.
+
+### `yarn test`
+
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+
+### `yarn build`
+
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
+
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
+
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
 

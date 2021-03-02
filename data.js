@@ -12,13 +12,13 @@ const form = {
       label: 'First Name',
       mask: nameRegex,
       id: 'firstName',
-      definition: 'Please provide your first name'
+      definition: 'Please provide your first name',
     },
     {
       type: 'checkbox',
       label: 'Do you have a middle name?',
       id: 'hasMiddleName',
-      definition: 'Do you have a middle name?'
+      definition: 'Do you have a middle name?',
     },
     {
       type: 'text',
@@ -26,14 +26,14 @@ const form = {
       mask: nameRegex,
       id: 'middleName',
       definition: 'Please provide your middle name',
-      dependencies: { hasMiddleName: true }
+      dependencies: { hasMiddleName: true },
     },
     {
       type: 'text',
       label: 'Last Name',
       mask: nameRegex,
       id: 'lastName',
-      definition: 'Please provide your last name'
+      definition: 'Please provide your last name',
     },
   ],
   'Home Address': [
@@ -41,40 +41,42 @@ const form = {
       type: 'text',
       label: 'Address 1',
       id: 'address1',
-      definition: 'Please provide your street address'
+      definition: 'Please provide your street address',
     },
     {
       type: 'checkbox',
       label: 'Do you live in an apartment or suite?',
       id: 'apartmentOrSuite',
-      definition: 'Do you live in an apartment or suite?'
+      definition: 'Do you live in an apartment or suite?',
     },
     {
       type: 'text',
       label: 'Address 2',
       id: 'address2',
       definition: 'Please provide your apartment or suite number',
-      dependencies: { apartmentOrSuite: true }
+      dependencies: { apartmentOrSuite: true },
     },
     {
       type: 'text',
       label: 'City',
       mask: nameRegex,
       id: 'city',
-      definition: 'Please provide your city'
+      definition: 'Please provide your city',
     },
     {
       type: 'select',
       label: 'State',
       id: 'state',
-      definition: 'Please provide your state', sourceList: states,
-      dependencies: { state: city => city && city.length !== 0 }
+      definition: 'Please provide your state',
+      sourceList: states,
+      dependencies: { state: city => city && city.length !== 0 },
     },
     {
       type: 'select',
       label: 'Country',
       id: 'country',
-      definition: 'Please provide your country', sourceList: countries
+      definition: 'Please provide your country',
+      sourceList: countries,
     },
     {
       type: 'number',
@@ -84,12 +86,10 @@ const form = {
       definition: 'Please provide your zipcode',
       dependencies: {
         state: state => state && state.length !== 0,
-        country: country => country?.code === 'US' //polyfill me
-      }
+        country: country => country?.code === 'US', //polyfill me
+      },
     },
   ],
 };
-
-console.log('DATA', form);
 
 module.exports = form;
