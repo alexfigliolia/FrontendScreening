@@ -1,7 +1,4 @@
 import { Container } from '@material-ui/core';
-import logo from './logo.svg';
-import './App.css';
-
 import Form from './Form';
 
 function App() {
