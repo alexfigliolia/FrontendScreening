@@ -11,7 +11,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 
 import Box from '@material-ui/core/Box';
-import { useDataForm } from '../hooks/form';
+import { useForm } from '../hooks/form';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -57,7 +57,7 @@ const isSelect = type => type === 'select';
 const Form = () => {
   const [state, setState] = useState(null);
 
-  const { status, data } = useDataForm();
+  const { status, data } = useForm();
   const classes = useStyles();
 
   if (status !== 'success' || !data) {
