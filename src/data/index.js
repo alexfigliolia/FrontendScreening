@@ -96,7 +96,7 @@ export const formData = [
         type: 'select',
         label: 'Country',
         key: 'country',
-        definition: 'Please provide your country', sourceList: countries
+        definition: 'Please provide your country', sourceList: [{name: "Select a Country", code: "0"}, ...countries]
       },
       {
         type: 'number',
