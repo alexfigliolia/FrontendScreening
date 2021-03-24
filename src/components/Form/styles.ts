@@ -171,9 +171,9 @@ export const Select = styled.select`
   border-bottom: ${rem(1)} solid ${props => props.theme.colors.darkgray};
   font-size: ${rem(16)};
   font-weight: 400;
-  line-height: ${rem(16)};
+  line-height: ${rem(22)};
   height: ${rem(40)};
-  padding: ${rem(18)} 0 ${rem(6)};
+  padding: ${rem(15)} 0 ${rem(3)};
   outline: none;
   transition: ${props => props.theme.transition};
   width: 100%;
