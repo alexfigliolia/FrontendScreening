@@ -1,0 +1,1 @@
+export const rem = (px: number, bs: number = 16) => `${px / bs}rem`

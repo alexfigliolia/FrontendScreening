@@ -1,4 +1,241 @@
-const states = ['Alabama', 'Alaska', 'American Samoa', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'District of Columbia', 'Federated States of Micronesia', 'Florida', 'Georgia', 'Guam', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Marshall Islands', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Northern Mariana Islands', 'Ohio', 'Oklahoma', 'Oregon', 'Palau', 'Pennsylvania', 'Puerto Rico', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virgin Island', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'];
+const states = [
+  {
+      "name": "Alabama",
+      "code": "Alabama"
+  },
+  {
+      "name": "Alaska",
+      "code": "Alaska"
+  },
+  {
+      "name": "American Samoa",
+      "code": "American Samoa"
+  },
+  {
+      "name": "Arizona",
+      "code": "Arizona"
+  },
+  {
+      "name": "Arkansas",
+      "code": "Arkansas"
+  },
+  {
+      "name": "California",
+      "code": "California"
+  },
+  {
+      "name": "Colorado",
+      "code": "Colorado"
+  },
+  {
+      "name": "Connecticut",
+      "code": "Connecticut"
+  },
+  {
+      "name": "Delaware",
+      "code": "Delaware"
+  },
+  {
+      "name": "District of Columbia",
+      "code": "District of Columbia"
+  },
+  {
+      "name": "Federated States of Micronesia",
+      "code": "Federated States of Micronesia"
+  },
+  {
+      "name": "Florida",
+      "code": "Florida"
+  },
+  {
+      "name": "Georgia",
+      "code": "Georgia"
+  },
+  {
+      "name": "Guam",
+      "code": "Guam"
+  },
+  {
+      "name": "Hawaii",
+      "code": "Hawaii"
+  },
+  {
+      "name": "Idaho",
+      "code": "Idaho"
+  },
+  {
+      "name": "Illinois",
+      "code": "Illinois"
+  },
+  {
+      "name": "Indiana",
+      "code": "Indiana"
+  },
+  {
+      "name": "Iowa",
+      "code": "Iowa"
+  },
+  {
+      "name": "Kansas",
+      "code": "Kansas"
+  },
+  {
+      "name": "Kentucky",
+      "code": "Kentucky"
+  },
+  {
+      "name": "Louisiana",
+      "code": "Louisiana"
+  },
+  {
+      "name": "Maine",
+      "code": "Maine"
+  },
+  {
+      "name": "Marshall Islands",
+      "code": "Marshall Islands"
+  },
+  {
+      "name": "Maryland",
+      "code": "Maryland"
+  },
+  {
+      "name": "Massachusetts",
+      "code": "Massachusetts"
+  },
+  {
+      "name": "Michigan",
+      "code": "Michigan"
+  },
+  {
+      "name": "Minnesota",
+      "code": "Minnesota"
+  },
+  {
+      "name": "Mississippi",
+      "code": "Mississippi"
+  },
+  {
+      "name": "Missouri",
+      "code": "Missouri"
+  },
+  {
+      "name": "Montana",
+      "code": "Montana"
+  },
+  {
+      "name": "Nebraska",
+      "code": "Nebraska"
+  },
+  {
+      "name": "Nevada",
+      "code": "Nevada"
+  },
+  {
+      "name": "New Hampshire",
+      "code": "New Hampshire"
+  },
+  {
+      "name": "New Jersey",
+      "code": "New Jersey"
+  },
+  {
+      "name": "New Mexico",
+      "code": "New Mexico"
+  },
+  {
+      "name": "New York",
+      "code": "New York"
+  },
+  {
+      "name": "North Carolina",
+      "code": "North Carolina"
+  },
+  {
+      "name": "North Dakota",
+      "code": "North Dakota"
+  },
+  {
+      "name": "Northern Mariana Islands",
+      "code": "Northern Mariana Islands"
+  },
+  {
+      "name": "Ohio",
+      "code": "Ohio"
+  },
+  {
+      "name": "Oklahoma",
+      "code": "Oklahoma"
+  },
+  {
+      "name": "Oregon",
+      "code": "Oregon"
+  },
+  {
+      "name": "Palau",
+      "code": "Palau"
+  },
+  {
+      "name": "Pennsylvania",
+      "code": "Pennsylvania"
+  },
+  {
+      "name": "Puerto Rico",
+      "code": "Puerto Rico"
+  },
+  {
+      "name": "Rhode Island",
+      "code": "Rhode Island"
+  },
+  {
+      "name": "South Carolina",
+      "code": "South Carolina"
+  },
+  {
+      "name": "South Dakota",
+      "code": "South Dakota"
+  },
+  {
+      "name": "Tennessee",
+      "code": "Tennessee"
+  },
+  {
+      "name": "Texas",
+      "code": "Texas"
+  },
+  {
+      "name": "Utah",
+      "code": "Utah"
+  },
+  {
+      "name": "Vermont",
+      "code": "Vermont"
+  },
+  {
+      "name": "Virgin Island",
+      "code": "Virgin Island"
+  },
+  {
+      "name": "Virginia",
+      "code": "Virginia"
+  },
+  {
+      "name": "Washington",
+      "code": "Washington"
+  },
+  {
+      "name": "West Virginia",
+      "code": "West Virginia"
+  },
+  {
+      "name": "Wisconsin",
+      "code": "Wisconsin"
+  },
+  {
+      "name": "Wyoming",
+      "code": "Wyoming"
+  }
+]
 
 const countries = [
   { name: "United States", code: 'US' },
