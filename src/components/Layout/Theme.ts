@@ -7,7 +7,9 @@ export const theme: DefaultTheme = {
     white: "#FFFFFF",
     blue: "#2f5c79",
     gray: "#f2f6fd",
-    darkgray: "#DDDDDD"
+    darkgray: "#DDDDDD",
+    green: "#00B19E",
+    lightgreen: "#3FC08C"
   },
   transition: "all 150ms ease-in-out",
   media: {

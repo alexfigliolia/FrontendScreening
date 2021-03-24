@@ -6,7 +6,7 @@
       "@components/*": ["./components/*"],
       "@pages/*": ["./pages/*"],
       "@utils/*": ["./utils/*"],
-      "@data/*": ["./data/*"],
+      "@data": ["./data"],
     },
     "lib": [
       "dom",

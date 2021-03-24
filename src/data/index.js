@@ -7,92 +7,109 @@ const numberRegex = /^\d+$/;
 
 export const formData = [
   {
-    id: "fullname",
+    key: "fullname",
     name: "Full Name",
     fields: [
       {
         type: 'text',
         label: 'First Name',
         mask: nameRegex,
-        id: 'firstName',
+        key: 'firstName',
         definition: 'Please provide your first name'
       },
       {
         type: 'checkbox',
         label: 'Do you have a middle name?',
-        id: 'hasMiddleName',
+        key: 'hasMiddleName',
         definition: 'Do you have a middle name?'
       },
       {
         type: 'text',
         label: 'Middle Name',
         mask: nameRegex,
-        id: 'middleName',
+        key: 'middleName',
         definition: 'Please provide your middle name',
-        dependencies: { hasMiddleName: true }
+        dependencies: [
+          {
+            key: 'hasMiddleName',
+            validation: hasMiddleName => hasMiddleName ? true : false
+          }
+        ]
       },
       {
         type: 'text',
         label: 'Last Name',
         mask: nameRegex,
-        id: 'lastName',
+        key: 'lastName',
         definition: 'Please provide your last name'
       },
     ],
   },
   {
-    id: "homeaddress",
+    key: "homeaddress",
     name: "Home Address",
     fields: [
       {
         type: 'text',
         label: 'Address 1',
-        id: 'address1',
+        key: 'address1',
         definition: 'Please provide your street address'
       },
       {
         type: 'checkbox',
         label: 'Do you live in an apartment or suite?',
-        id: 'apartmentOrSuite',
+        key: 'apartmentOrSuite',
         definition: 'Do you live in an apartment or suite?'
       },
       {
         type: 'text',
         label: 'Address 2',
-        id: 'address2',
+        key: 'address2',
         definition: 'Please provide your apartment or suite number',
-        dependencies: { apartmentOrSuite: true }
+        dependencies: [
+          {
+            key: 'apartmentOrSuite',
+            validation: apartmentOrSuite => apartmentOrSuite ? true : false
+          }
+        ]
       },
       {
         type: 'text',
         label: 'City',
         mask: nameRegex,
-        id: 'city',
+        key: 'city',
         definition: 'Please provide your city'
       },
       {
         type: 'select',
         label: 'State',
-        id: 'state',
+        key: 'state',
         definition: 'Please provide your state', sourceList: states,
-        dependencies: { state: city => city && city.length !== 0 }
+        dependencies: [
+          { 
+            key: 'city',
+            validation: city => city && city.length !== 0 
+          }
+        ]
       },
       {
         type: 'select',
         label: 'Country',
-        id: 'country',
+        key: 'country',
         definition: 'Please provide your country', sourceList: countries
       },
       {
         type: 'number',
         label: 'Zipcode',
         mask: numberRegex,
-        id: 'zipCode',
+        key: 'zipCode',
         definition: 'Please provide your zipcode',
-        dependencies: {
-          state: state => state && state.length !== 0,
-          country: country => country?.code === 'US' //polyfill me
-        }
+        dependencies: [
+          { 
+            key: 'country',
+            validation: country => country === 'US' 
+          }
+        ]
       },
     ],
   }

@@ -1,21 +1,21 @@
 import * as React from 'react'
 import { formData } from '@data'
-import { Tag, Env, Header, Steps, Step, Info, Title, List, Group, Label, Text, Checkbox, Select, Option } from './styles'
+import { FieldsList } from './fields'
+import { Tag, Env, Header, Steps, Step, Info, Title, Bottom, Previous, Next } from './styles'
 
 interface StepProps {
+  isActive: boolean,
   total: number,
   current: number,
   title: string,
-  fields: any
-}
-
-interface FieldsProps {
-  list: any
+  fields: any,
+  setActiveStep: (step: number) => void,
+  stepsLength: number
 }
 
 const Form: React.FunctionComponent = () => {  
   return (
-    <Tag>
+    <Tag method="POST">
       <Env>
         <StepsList />
       </Env>
@@ -24,15 +24,20 @@ const Form: React.FunctionComponent = () => {
 }
 
 const StepsList: React.FunctionComponent = () => {
-  console.info(formData)
+  const [activeStep, setActiveStep] = React.useState(0)
+
   return (
     <Steps>
       { formData.map(({name, fields}, key) => (
-          <StepItem key={key} 
+          <StepItem 
+            key={key} 
+            isActive={activeStep === key}
             total={formData.length}
-            current={key + 1}
+            current={key}
             title={name}
             fields={fields}
+            setActiveStep={setActiveStep}
+            stepsLength={formData.length}
           />
         ))
       }
@@ -40,58 +45,24 @@ const StepsList: React.FunctionComponent = () => {
   )
 }
 
-const StepItem: React.FunctionComponent<StepProps> = ({ total, current, title, fields }) => {
+const StepItem: React.FunctionComponent<StepProps> = ({ isActive, total, current, title, fields, setActiveStep, stepsLength }) => {
 
   return (
-    <Step>
+    <Step isActive={isActive}>
       <Header>
-        <Info>step {current} of {total}</Info>
+        <Info>step {current + 1} of {total}</Info>
         <Title>{title}</Title>
         <FieldsList 
           list={fields}
         />
       </Header>
+      <Bottom>
+        { current > 0 && <Previous type="button" onClick={() => { setActiveStep(current - 1)}}>Previous</Previous> }
+        { current < stepsLength - 1 && <Next type="button" onClick={() => { setActiveStep(current + 1)}}>Next</Next> }
+        { current === stepsLength - 1 && <Next type="button">Submit</Next> }
+      </Bottom>
     </Step>
   )
-}
-
-const FieldsList: React.FunctionComponent<FieldsProps> = ({ list }) => {
-
-  return (
-    <List>
-      { list.map(({ label, id, type, definition, sourceList }, key) => (
-        <Group key={key}>
-          <Label htmlFor={`${id}`}>{ label }</Label>
-          { getField({ id, type, placeholder: definition, sourceList})}
-        </Group>
-      ))}
-    </List>
-  )
-}
-
-const getField = ({ id, type, placeholder, sourceList }) => {
-
-  switch(type) {
-    case "text": 
-      return <Text name={id} id={id} type={type} placeholder={placeholder} autoComplete="nocomplete" />
-
-    case "checkbox": 
-      return <Checkbox name={id} id={id} type={type} placeholder={placeholder} />
-
-    case "select": 
-      return (
-        <Select id={id} name={id}>
-          { sourceList.map(({name, code}, key) => (
-            <Option value={ code }>
-              { name }
-            </Option>
-          ))}
-        </Select>
-      )
-
-    default: 
-      return <Text name={id} type={type} placeholder={placeholder} autoComplete="nocomplete" />
-  }
 }
 
 export default Form

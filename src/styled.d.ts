@@ -8,7 +8,9 @@ declare module 'styled-components' {
       offblack: string,
       blue: string,
       gray: string,
-      darkgray: string
+      darkgray: string,
+      green: string,
+      lightgreen: string
     },
     transition: string,
     media: {
