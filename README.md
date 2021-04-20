@@ -15,18 +15,18 @@ ___
 
 **The following is a spec checklist for our desired functionality:**
 
-- [ ] Render a form with the following features using the data  provided in data.js and **React.js**
-- [ ] You may scaffold out a project with the tools of your choosing -  **webpack**, **yeoman**, **create-react-app**, etc
-- [ ] The form should have two labeled sections (**Full Name** and **Home Address**)
-- [ ] Inside each section, render an input for **each** of the array indices using only the data provided
-- [ ] Create masks to validate against provided regexes if necessary
-- [ ] Inputs with a **dependencies** key should only be visible if all of the **dependency keys** resolve to true. The format of the **dependencies** object is as follows: 
+- [x] Render a form with the following features using the data  provided in data.js and **React.js**
+- [x] You may scaffold out a project with the tools of your choosing -  **webpack**, **yeoman**, **create-react-app**, etc
+- [x] The form should have two labeled sections (**Full Name** and **Home Address**)
+- [x] Inside each section, render an input for **each** of the array indices using only the data provided
+- [x] Create masks to validate against provided regexes if necessary
+- [x] Inputs with a **dependencies** key should only be visible if all of the **dependency keys** resolve to true. The format of the **dependencies** object is as follows: 
     ```
     dependencies: { 
       [id_of_a_preceding_field (Ex: FirstName)]: value_or_conditional //ex: True | value => !!value
     }
-- [ ] Inputs with a **sourceList** parameter must limit its value to only the choices within the list provided
-- [ ] Track the progress of your users by tallying the total completed inputs against the total of incomplete inputs
+- [x] Inputs with a **sourceList** parameter must limit its value to only the choices within the list provided
+- [x] Track the progress of your users by tallying the total completed inputs against the total of incomplete inputs
 
 **A few things to keep in mind during this exercise:**
 1. Make your form look however you like - some fun designs can be found here: https://tympanus.net/Development/TextInputEffects/index2.html
