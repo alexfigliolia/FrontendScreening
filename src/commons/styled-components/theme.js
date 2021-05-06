@@ -12,7 +12,6 @@ export const GlobalStyle = createGlobalStyle`
 	}
 	body {
 		font-family: ${({theme}) => theme.fonts.family}, sans-serif;
-		background-color: #FFFFFF;
 	}
 `;
 

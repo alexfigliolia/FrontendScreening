@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const CheckboxContainer = styled.div`
 	display: inline-block;
 	vertical-align: middle;
+	cursor: pointer;
 `;
 
 export const Icon = styled.svg`
@@ -25,21 +26,21 @@ export const HiddenCheckbox = styled.input.attrs({type: 'checkbox'})`
 `;
 
 export const StyledCheckbox = styled.div`
-  display: inline-block;
-  width: 16px;
-  height: 16px;
-  background: ${({theme: {colors}, checked}) =>
-		checked ? colors.primary.red : colors.primary.gray}
-  border-radius: 3px;
-  transition: all 150ms;
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	background: ${({theme: {colors}, checked}) =>
+		checked ? colors.primary.red : colors.primary.gray};
+	border-radius: 3px;
+	transition: all 150ms;
 
-  ${HiddenCheckbox}:focus + & {
-    box-shadow: 0 0 0 3px pink;
-  }
+	${HiddenCheckbox}:focus + & {
+		box-shadow: 0 0 0 3px pink;
+	}
 
-  ${Icon} {
-    visibility: ${(props) => (props.checked ? 'visible' : 'hidden')}
-  }
+	${Icon} {
+		visibility: ${(props) => (props.checked ? 'visible' : 'hidden')};
+	}
 `;
 
 export const LabelSpan = styled.span`
@@ -47,4 +48,9 @@ export const LabelSpan = styled.span`
 	font-size: ${({theme}) => theme.fonts.sizes.medium};
 	color: ${({theme}) => theme.colors.primary.gray};
 	margin-left: 8px;
+`;
+
+export const Label = styled.label`
+	display: flex;
+	margin-bottom: 25px;
 `;

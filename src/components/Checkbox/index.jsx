@@ -1,4 +1,7 @@
+import {memo} from 'react';
+
 import {
+	Label,
 	CheckboxContainer,
 	HiddenCheckbox,
 	StyledCheckbox,
@@ -6,8 +9,8 @@ import {
 	LabelSpan,
 } from './styles';
 
-const Checkbox = ({className, checked, label, ...props}) => (
-	<label>
+const Checkbox = ({className, checked, label, id, ...props}) => (
+	<Label>
 		<CheckboxContainer className={className}>
 			<HiddenCheckbox checked={checked} {...props} />
 			<StyledCheckbox checked={checked}>
@@ -17,7 +20,9 @@ const Checkbox = ({className, checked, label, ...props}) => (
 			</StyledCheckbox>
 		</CheckboxContainer>
 		<LabelSpan>{label}</LabelSpan>
-	</label>
+	</Label>
 );
 
-export default Checkbox;
+Checkbox.id = 'checkbox';
+
+export default memo(Checkbox);

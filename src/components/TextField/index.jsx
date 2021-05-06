@@ -93,4 +93,6 @@ TextField.propTypes = {
 	helperMessage: PropTypes.string,
 };
 
+TextField.id = 'text';
+
 export default memo(TextField);

@@ -85,4 +85,6 @@ Select.propTypes = {
 	error: PropTypes.string,
 };
 
+Select.id = 'select';
+
 export default memo(Select);
