@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import {Label, Container, Wrapper, Disclaimer} from '../TextField/styles';
 import {CustomSelect, Chevron} from './styles';
 
-const Select = ({id, label, onChange, onBlur, onFocus, error, options}) => {
+const Select = ({id, label, onChange, onBlur, onFocus, error, sourceList}) => {
 	const [fieldActive, setFieldActive] = useState(false);
 
 	function activateField() {
@@ -45,9 +45,9 @@ const Select = ({id, label, onChange, onBlur, onFocus, error, options}) => {
 					$error={error}
 				>
 					<option value=""></option>
-					{options.map(({text, value}) => (
-						<option key={value} value={value}>
-							{text}
+					{sourceList.map((source, index) => (
+						<option key={index} value={source?.code || source}>
+							{source?.name || source}
 						</option>
 					))}
 				</CustomSelect>
@@ -73,10 +73,10 @@ Select.defaultProps = {
 Select.propTypes = {
 	label: PropTypes.string.isRequired,
 	id: PropTypes.string.isRequired,
-	options: PropTypes.arrayOf(
+	sourceList: PropTypes.arrayOf(
 		PropTypes.shape({
-			text: PropTypes.string,
-			value: PropTypes.string,
+			name: PropTypes.string,
+			code: PropTypes.string,
 		})
 	),
 	onChange: PropTypes.func,

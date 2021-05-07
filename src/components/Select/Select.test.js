@@ -11,7 +11,7 @@ const createTestProps = (props) => ({
 	onChange: jest.fn(),
 	onBlur: jest.fn(),
 	onFocus: jest.fn(),
-	options: [{text: 'car', value: 'car'}],
+	sourceList: [{name: 'car', code: 'car'}],
 	...props,
 });
 
